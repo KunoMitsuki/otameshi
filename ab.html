@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>十字キーのコントローラ</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .controller {
+            width: 850px;
+            margin: 650px auto;
+        }
+        
+        .button {
+            width: 180px;
+            height: 180px;
+            background-color: lightgray;
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 124px;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        video {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay></video>
+    </div>
+
+    <div class="controller">
+        <div class="button" onclick="move('up')">↑</div>
+        <div class="button" onclick="move('left')">←</div>
+        <div class="button" onclick="move('right')">→</div>
+        <div class="button" onclick="move('down')">↓</div>
+    </div>
+
+    <script>
+        const video = document.querySelector('video');
+
+        // カメラのビデオストリームを取得
+        async function getCameraStream() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (error) {
+                console.error('カメラのビデオストリームを取得できませんでした。', error);
+            }
+        }
+
+        // ページがロードされた時にカメラのビデオストリームを取得
+        window.onload = () => {
+            getCameraStream();
+        };
+
+        function move(direction) {
+            // 各ボタンの機能を設定
+            switch (direction) {
+                case 'up':
+                    openURL('https://www.google.co.jp/');
+                    break;
+                case 'left':
+                    openURL('https://www.google.co.jp/');
+                    break;
+                case 'right':
+                    openURL('https://www.google.co.jp/');
+                    break;
+                case 'down':
+                    openURL('https://www.google.co.jp/');
+                    break;
+            }
+        }
+
+        function openURL(url) {
+            // 新しいタブでURLを開く
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
